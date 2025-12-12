@@ -1,0 +1,19 @@
+CREATE DATABASE fullstack_blog CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE fullstack_blog;
+
+CREATE TABLE posts (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE comments (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    post_id INT UNSIGNED NOT NULL,
+    comment TEXT NOT NULL,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_comments_post
+      FOREIGN KEY (post_id) REFERENCES posts(id)
+      ON DELETE CASCADE
+);
